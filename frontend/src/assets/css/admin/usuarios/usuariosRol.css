@@ -1,0 +1,163 @@
+.usuariosRol .rol {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 50px;
+}
+.usuariosRol .rol p {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    cursor: pointer;
+    transition: all 1s;
+    position: relative;
+}
+.usuariosRol .rol p:hover {
+    transform: scale(1.20);
+}
+
+.usuariosRol .rol p:nth-child(1)::before {
+    content: 'ESTUDIANTE';
+    position: absolute;
+    top: 0px;
+}
+.usuariosRol .rol p:nth-child(2)::before {
+    content: 'INSTRUCTOR';
+    position: absolute;
+    top: 0;
+}
+.usuariosRol .rol p:hover::before {
+    width: 100%;
+    animation: animacion 1.5s steps(35), transparent .5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    color: blue;
+    border-right: 2px solid blue;
+}
+
+@keyframes animacion {
+    from {
+        width: 0px;
+    }
+}
+@keyframes transparent {
+    50% {
+        border-color: transparent;
+    }
+}
+.table {
+    border-spacing: 1;
+    border-collapse: collapse;
+    overflow: hidden;
+    width: 90%;
+    max-width: 700px;
+    overflow-x: auto;
+    margin: 40px auto;
+    position: relative; /* Cambia a posición relativa */
+}
+
+.table tr th {
+    width: 100%;
+    text-wrap: nowrap;
+    font-size: 16px;
+    
+    border-bottom: 1px solid #000;
+}
+.table tr td:nth-child(1),
+.table tr th:nth-child(1),
+.table tr th:nth-child(2),
+.table tr th:nth-child(2),
+.table tr th:nth-child(3) {
+    width: 15%;
+}
+
+.table th,
+.table td {
+    text-align: left;
+    vertical-align: middle;
+    border-collapse: collapse;
+    padding: 15px 20px;
+    border-bottom: 1px solid #000;
+    transition: all .5s;
+
+}
+
+.table tbody tr:hover {
+    background-color: #979696;
+    color: #fff;
+}
+
+.table td img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: all .5s;
+}
+.table td img:hover {
+    transform: scale(1.25);
+}
+.table tbody tr .acciones {
+    display: flex;
+
+    flex-direction: row;
+    gap: 5px;
+    margin-top: 10px;
+    padding-bottom: 23px;
+}
+
+
+.table tbody tr .acciones button {
+    
+    width: 100%;
+    border: none;
+    padding: 10px;
+    margin: 0 5px;
+    color: #fff;
+    cursor: pointer;
+}
+.table .user {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+}
+
+.table tbody tr .acciones button:first-child {
+    background-color: rgb(75, 74, 74);
+    transition: all .5s;
+}
+.table tbody tr .acciones button:first-child:hover {
+    background-color: #131313;
+}
+.table tbody tr .acciones button:nth-child(2) {
+    background-color: #00840D;
+    transition: all .5s;
+}
+.table tbody tr .acciones button:nth-child(2):hover {
+    background-color: #06470d;
+}
+.table tbody tr .acciones button:last-child {
+    background-color: #C00000;
+    transition: all .5s;
+}
+.table tbody tr .acciones button:last-child:hover {
+    background-color: #790606;
+}
+
+@media screen and (max-width: 900px) {
+    body {
+        overflow-x: hidden;
+    }
+    .table tr td,
+    .table tr th {
+        padding: 15px 10px;
+    }
+    .table tbody .acciones {
+        flex-wrap: wrap;
+    }
+
+    .usuariosRol .rol p {
+        letter-spacing: .2em;
+    }
+}
