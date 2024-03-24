@@ -1,8 +1,8 @@
 // Urls de la API al que apunta mi NodeJS
-const apiUrl = 'http://localhost:3901';
-console.log(apiUrl);
+const apiUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3901' : process.env.VERCEL_URL;
+
 export const Global = {
-    url: `${apiUrl}/api/`,
-    urlAdmin: `${apiUrl}/admin/`,
-    urlCursos: `${apiUrl}/cursos/`
+    url: `${apiUrl}/api/user/`,
+    urlAdmin: `${apiUrl}/api/admin/`,
+    urlCursos: `${apiUrl}/api/cursos/`
 }

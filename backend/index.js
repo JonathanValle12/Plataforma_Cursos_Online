@@ -20,13 +20,13 @@ const allowedOrigin = process.env.NODE_ENV === 'production' ? process.env.VERCEL
 
 // Configuración de CORS
 const corsOptions = {
-  origin: allowedOrigin, // Reemplaza "puerto" con el puerto en el que se ejecuta tu frontend
+  origin: allowedOrigin, // Permitir todas las solicitudes temporariamente
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'], // Cabeceras permitidas
 };
 
 // Habilitar CORS con opciones personalizadas
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -35,9 +35,9 @@ const User = require("./routes/user");
 const Admin = require("./routes/admin");
 const Curso = require("./routes/curso");
 // Iniciar mi API en el /api
-app.use("/api", User);
-app.use("/admin", Admin);
-app.use("/cursos", Curso)
+app.use("/api/user", User);
+app.use("/api/admin", Admin);
+app.use("/api/curso", Curso)
 // Escuchar mi servidor en el puerto 3900
 app.listen(puerto, function () {
   console.log("Servidor en el puerto: ", puerto);
