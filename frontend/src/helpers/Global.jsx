@@ -4,7 +4,7 @@ let apiUrl ;
 if (process.env.NODE_ENV === 'development') { 
     apiUrl = 'http://localhost:3901'
 } else {
-    apiUrl = 'http://93.176.147.216:3901';
+    apiUrl = 'http://localhost:3901';
 }
 export const Global = {
     url: `${apiUrl}/api/`,

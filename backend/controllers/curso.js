@@ -323,6 +323,7 @@ const añadirRating = async (req, res) => {
     });
 
   } catch (error) {
+    console.log(error);
     return res.status(500).send({
       status: "error",
       message: "Error al añadir el rating de ese usuario"

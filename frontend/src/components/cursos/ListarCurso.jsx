@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
-
 import '../../assets/css/cursos/listarCurso.css';
 import useAuth from '../../hooks/useAuth';
 import Header from '../layout/Header';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import defaults from '../../assets/img/defaults.png';
 import { Global } from '../../helpers/Global';
 import Swal from 'sweetalert2';
@@ -20,13 +19,14 @@ const ListarCurso = () => {
     const [comentarios, setComentarios] = useState([]);
     const [nuevoComentario, setNuevoComentario] = useState("");
     const [showLoginAlert, setShowLoginAlert] = useState(null);
+    const [showInstructorAlert, setShowInstructorAlert] = useState(null);
     const [mostrarRating, setMostrarRating] = useState(0);
     const [ratingSaved, setRatingSaved] = useState(false); // Nuevo estado para controlar si el rating se ha guardado
     const [selectedRating, setSelectedRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
     const [guardarRating, setGuardarRating] = useState(0);
 
-    const idCurso = window.location.pathname.split('/')[3];
+    const idCurso = useParams();
 
     const starArray = [...Array(5).keys()].map(i => i + 1);
     const { auth } = useAuth();
@@ -40,6 +40,7 @@ const ListarCurso = () => {
 
     useEffect(() => {
         obtenerCurso();
+        obtenerRating();
     }, []);
 
     useEffect(() => {
@@ -48,10 +49,9 @@ const ListarCurso = () => {
 
     useEffect(() => {
         obtenerRating();
-      }, [cursos, auth._id, selectedRating]);
+      }, [auth._id]);
     
       useEffect(() => {
-        console.log(guardarRating);
         localStorage.setItem('selectedRating', selectedRating.toString());
         setGuardarRating(selectedRating);
           agregarRating();
@@ -62,7 +62,7 @@ const ListarCurso = () => {
         if (!ratingSaved) {
             setHoverRating(selectedRating);
           }
-      }, [selectedRating]);
+      }, [selectedRating, ratingSaved]);
 
     const handleScroll = () => {
         const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
@@ -74,7 +74,7 @@ const ListarCurso = () => {
     };
 
     const obtenerComentarios = async() => {
-        const request = await fetch(Global.urlCursos + "comentarios/" + idCurso, {
+        const request = await fetch(Global.urlCursos + "comentarios/" + idCurso.id, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -107,7 +107,7 @@ const ListarCurso = () => {
     }
 
     const obtenerCurso = async () => {
-        const requestMostrar = await fetch(Global.urlCursos + "mostrar-curso/" + idCurso, {
+        const requestMostrar = await fetch(Global.urlCursos + "mostrar-curso/" + idCurso.id, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -143,7 +143,7 @@ const ListarCurso = () => {
               })
               return;
         }
-        const request = await fetch(Global.urlCursos + "comentario/"+ idCurso, {
+        const request = await fetch(Global.urlCursos + "comentario/"+ idCurso.id, {
             method: "POST",
             body: JSON.stringify({ texto: nuevoComentario}),
             headers: {
@@ -160,7 +160,7 @@ const ListarCurso = () => {
       }
 
       const eliminarComentario = async (comentarioId) => {
-        const request = await fetch(Global.urlCursos + idCurso + "/comentario/" + comentarioId, {
+        const request = await fetch(Global.urlCursos + idCurso.id + "/comentario/" + comentarioId, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -185,20 +185,19 @@ const ListarCurso = () => {
 
 
       const agregarRating = async () => {
-        if (auth._id && selectedRating !== 0) {
-          const request = await fetch(Global.urlCursos + 'rating/' + idCurso, {
-            method: 'POST',
-            body: JSON.stringify({
-              rating: parseInt(selectedRating),
-            }),
+        if (auth._id && selectedRating !== 0 && !ratingSaved) {
+          const request = await fetch(Global.urlCursos + "rating/" + idCurso.id, {
+            method: "POST",
+            body: JSON.stringify({rating: parseInt(selectedRating)}),
             headers: {
-              'Content-Type': 'application/json',
-              Authorization: localStorage.getItem('token'),
+              "Content-Type": "application/json",
+              "Authorization": localStorage.getItem("token"),
             },
           });
       
           if (request.ok) {
             const datos = await request.json();
+            console.log(datos);
             setGuardarRating(datos.rating);
             setMostrarRating(datos.rating);
             setRatingSaved(true);
@@ -206,15 +205,13 @@ const ListarCurso = () => {
         }
       };
       
-      
-
       const obtenerRating = async () => {
         if (!idCurso) {
           return;
         }
       
         if (auth._id) {
-          const request = await fetch(Global.urlCursos + 'rating/' + idCurso, {
+          const request = await fetch(Global.urlCursos + 'rating/' + idCurso.id, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -233,8 +230,7 @@ const ListarCurso = () => {
             setHoverRating(0);
             setSelectedRating(0);
           }
-      
-          console.log(datos);
+  
         }
       };
 
@@ -402,19 +398,19 @@ const ListarCurso = () => {
                         <div className='close' onClick={cerrarModal}>X</div>
                         <h2>Pago</h2>
                         <div className='form-group'>
-                            <label htmlhtmlForm='titular'>Nombre Titular: *</label>
+                            <label htmlFor='titular'>Nombre Titular: *</label>
                             <input type='text' name='name' placeholder='Nombre Titular' />
                         </div>
                         <div className='form-group'>
-                            <label htmlhtmlForm='targeta'>Numero Targeta: *</label>
+                            <label htmlFor='targeta'>Numero Targeta: *</label>
                             <input type='text' name='numTargeta' placeholder='Numero Targeta' />
                         </div>
                         <div className='form-group'>
-                            <label htmlhtmlForm='fechaCaducidad'>Fecha Caducidad: *</label>
+                            <label htmlFor='fechaCaducidad'>Fecha Caducidad: *</label>
                             <input type='text' name='fechaCaducidad' placeholder='fecha caducidad' />
                         </div>
                         <div className='form-group'>
-                            <label htmlhtmlForm='cvv'>CVV: *</label>
+                            <label htmlFor='cvv'>CVV: *</label>
                             <input type='number' name='cvv' placeholder='CVV' min="1" max="3" />
                         </div>
                         <input type='submit' value="Envia" />
