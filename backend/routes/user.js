@@ -3,7 +3,7 @@ const User = require("../controllers/user");
 const check = require("../middleware/auth");
 // Definir dependencias de express para declarar las rutas de mi API
 const express = require("express");
-const app = express();
+const router = express.Router();
 // Dependencia para la subida de archivos
 const multer = require("multer");
 
@@ -35,12 +35,12 @@ const uploads2 = multer({
 })
 
 // Definir rutas del registro y el login
-app.post("/registrar", uploads.single("curriculum"), User.registrar);
-app.post("/login", User.login);
-app.get("/profile/:id", check.auth, User.profile);
-app.put("/update", check.auth, User.update);
-app.post("/upload", [check.auth, uploads2.single("file0")], User.upload);
-app.get("/avatar/:file", User.avatar);
-app.get("/mostrarCurriculum/:file", User.mostrarCurriculum);
-// Exportar el modulo app
-module.exports = app;
+router.post("/registrar", uploads.single("curriculum"), User.registrar);
+router.post("/login", User.login);
+router.get("/profile/:id", check.auth, User.profile);
+router.put("/update", check.auth, User.update);
+router.post("/upload", [check.auth, uploads2.single("file0")], User.upload);
+router.get("/avatar/:file", User.avatar);
+router.get("/mostrarCurriculum/:file", User.mostrarCurriculum);
+// Exportar el modulo router
+module.exports = router;

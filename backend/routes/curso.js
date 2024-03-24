@@ -1,6 +1,6 @@
 // Definir dependencias de express para declarar las rutas de mi API
 const express = require("express");
-const app = express();
+const router = express.Router();
 const check = require("../middleware/auth");
 // Importar el modelo curso
 const Curso = require("../controllers/curso")
@@ -27,18 +27,18 @@ const storage = multer.diskStorage({
 })
 const upload = multer({storage});
 
-app.get("/mostrar-cursos", Curso.mostrarCursos)
-app.get("/mostrar-curso/:id", Curso.mostrarCurso)
-app.post("/crear-curso", [check.auth, upload.fields([{ name: "imagen" }, { name: "video" }, {name: "pdf"}])], Curso.crearCurso)
-app.get("/visualizar-imagen/:file", Curso.visualizarImagen);
-app.get("/visualizar-docs/:file", Curso.visualizarDocs);
-app.get("/visualizar-video/:file", Curso.visualizarVideo);
-app.post("/comentario/:id", check.auth, Curso.añadirComentario);
-app.get('/comentarios/:id', Curso.mostrarComentarios);
-app.delete('/:idCurso/comentario/:idComentario', Curso.eliminarComentario);
-app.post("/rating/:id", check.auth, Curso.añadirRating);
-app.get('/rating/:id', check.auth, Curso.obtenerRating);
+router.get("/mostrar-cursos", Curso.mostrarCursos)
+router.get("/mostrar-curso/:id", Curso.mostrarCurso)
+router.post("/crear-curso", [check.auth, upload.fields([{ name: "imagen" }, { name: "video" }, {name: "pdf"}])], Curso.crearCurso)
+router.get("/visualizar-imagen/:file", Curso.visualizarImagen);
+router.get("/visualizar-docs/:file", Curso.visualizarDocs);
+router.get("/visualizar-video/:file", Curso.visualizarVideo);
+router.post("/comentario/:id", check.auth, Curso.añadirComentario);
+router.get('/comentarios/:id', Curso.mostrarComentarios);
+router.delete('/:idCurso/comentario/:idComentario', Curso.eliminarComentario);
+router.post("/rating/:id", check.auth, Curso.añadirRating);
+router.get('/rating/:id', check.auth, Curso.obtenerRating);
 
 
-// Exportar el modulo app
-module.exports = app; 
+// Exportar el modulo router
+module.exports = router; 

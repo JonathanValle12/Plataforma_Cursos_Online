@@ -15,14 +15,8 @@ const app = express();
 const puerto = process.env.PORT || 3900; // Definir puerto en el 3900
 
 // Iniciar mi app para que utilize los cors(), y pasar el express en json y por ultimo definir que pasaremos todo por el urlencoded que estaa en el postman dentro del body
-let allowedOrigin;
 
-if (process.env.NODE_ENV === 'production') {
-  allowedOrigin = 'http://93.176.147.216:5173';
-} else {
-  allowedOrigin = 'http://localhost:5173'; // O la dirección de tu servidor local
-}
-
+const allowedOrigin = process.env.NODE_ENV === 'production' ? process.env.VERCEL_URL : 'http://localhost:5173'
 
 // Configuración de CORS
 const corsOptions = {

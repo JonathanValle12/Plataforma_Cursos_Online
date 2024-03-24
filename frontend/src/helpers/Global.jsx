@@ -1,11 +1,6 @@
 // Urls de la API al que apunta mi NodeJS
-let apiUrl ;
-
-if (process.env.NODE_ENV === 'development') { 
-    apiUrl = 'http://localhost:3901'
-} else {
-    apiUrl = 'http://localhost:3901';
-}
+const apiUrl = 'http://localhost:3901';
+console.log(apiUrl);
 export const Global = {
     url: `${apiUrl}/api/`,
     urlAdmin: `${apiUrl}/admin/`,
