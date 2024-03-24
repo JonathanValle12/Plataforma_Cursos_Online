@@ -17,7 +17,7 @@ import Solicitud from '../components/admin/panel/Solicitud';
 
 const Routers = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
           <Route index element={<Cursos />} />
           <Route path="/cursos">
@@ -43,7 +43,7 @@ const Routers = () => {
 
       </Routes>
     
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
