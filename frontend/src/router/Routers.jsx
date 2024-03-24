@@ -8,16 +8,15 @@ import CrearCursos from '../components/cursos/CrearCursos';
 import Error from '../Error';
 import Logout from '../components/login/Logout';
 import Admin from '../components/admin/Admin';
-import Usuarios from '../components/admin/panel/Usuarios';
-import EditarPerfil from '../components/login/EditarPerfil';
-import Pendientes from '../components/admin/panel/Pendientes';
-import LogoutAdmin from '../components/admin/panel/LogoutAdmin';
-import Solicitud from '../components/admin/panel/Solicitud';
-import ListarCurso from '../components/cursos/listarCurso';
+import Usuarios from '../components/admin/panel/Usuarios.jsx';
+import EditarPerfil from '../components/login/EditarPerfil.jsx';
+import Pendientes from '../components/admin/panel/Pendientes.jsx';
+import LogoutAdmin from '../components/admin/panel/LogoutAdmin.jsx';
+import Solicitud from '../components/admin/panel/Solicitud.jsx';
+import ListarCurso from '../components/cursos/listarCurso.jsx';
 
 const Routers = () => {
   return (
-    <>
     <BrowserRouter>
       <Routes>
           <Route index element={<Cursos />} />
@@ -45,7 +44,6 @@ const Routers = () => {
       </Routes>
     
     </BrowserRouter>
-    </>
   )
 }
 
