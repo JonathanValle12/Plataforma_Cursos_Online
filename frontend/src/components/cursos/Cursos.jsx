@@ -18,7 +18,6 @@ const Cursos = () => {
         }); // Reemplaza con la URL de tu API
         const jsonData = await response.json();
         setData(jsonData);
-        console.log(jsonData);
       } catch (error) {
         console.log('Error al obtener los datos de la API:', error);
       }
