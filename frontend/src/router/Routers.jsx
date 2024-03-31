@@ -1,5 +1,5 @@
 import React from 'react'
-import {HashRouter, Routes, Route, BrowserRouter} from 'react-router-dom';
+import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import Cursos from '../components/cursos/Cursos';
 import Login from '../components/login/Login';
 import Registro from '../components/login/Registro';
@@ -17,7 +17,7 @@ import Solicitud from '../components/admin/panel/Solicitud';
 
 const Routers = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
           <Route index element={<Cursos />} />
           <Route path="/cursos">
@@ -43,7 +43,7 @@ const Routers = () => {
 
       </Routes>
     
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 
