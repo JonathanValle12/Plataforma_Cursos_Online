@@ -18,30 +18,31 @@ import Solicitud from '../components/admin/panel/Solicitud';
 const Routers = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route index element={<Cursos />} />
-        <Route path='/' element={<Cursos />}>
-          <Route path='/cursos' element={<Cursos />} />
-          <Route path="/mis-cursos" element={<MisCursos />} />
-          <Route path="/crear-cursos" element={<CrearCursos />} />
-          <Route path="/editarPerfil" element={<EditarPerfil />} />
-          <Route path="/ver-curso/:id" element={<ListarCurso />} />
-        </Route>
-        <Route path="login" element={<Login />} />
-        <Route path="registro" element={<Registro />} />
-        <Route path="logout" element={<Logout />} />
+    <Routes>
+          <Route index element={<Cursos />} />
+          <Route path="/cursos">
+            <Route path='' element={<Cursos />} />
+            <Route path="mis-cursos" element={<MisCursos />} />
+            <Route path="crear-cursos" element={<CrearCursos />} />
+            <Route path="editarPerfil" element={<EditarPerfil />} />
+            <Route path="ver-curso/:id" element={<ListarCurso />} />
+          </Route>
+          <Route path="login" element={<Login />} />
+          <Route path="registro" element={<Registro />} />
+          <Route path="logout" element={<Logout />} />
 
-        <Route path="/admin">
-          <Route path='' element={<Admin />} />
-          <Route path="panel" element={<Usuarios />} />
-          <Route path="panel/instructores-pendientes" element={<Pendientes />} />
-          <Route path="panel/logout" element={<LogoutAdmin />} />
-          <Route path="panel/instructores-pendientes/curriculum/:id" element={<Solicitud />} />
-        </Route>
+          <Route path="/admin">
+            <Route path='' element={<Admin />}/>
+            <Route path="panel" element={<Usuarios />} />
+            <Route path="panel/instructores-pendientes" element={<Pendientes />} />         
+            <Route path="panel/logout" element={<LogoutAdmin />} />
+            <Route path="panel/instructores-pendientes/curriculum/:id" element={<Solicitud />} />
+          </Route>
 
-        <Route path="*" element={<Error />} />
+          <Route path="*" element={<Error />} />
 
       </Routes>
+  
 
     </BrowserRouter>
   )
