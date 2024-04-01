@@ -19,6 +19,7 @@ const Routers = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route index element={<Cursos />} />
         <Route path='/' element={<Cursos />}>
           <Route path='/cursos' element={<Cursos />} />
           <Route path="/mis-cursos" element={<MisCursos />} />
