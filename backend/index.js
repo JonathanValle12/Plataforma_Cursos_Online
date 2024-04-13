@@ -20,7 +20,7 @@ const allowedOrigin = process.env.NODE_ENV === 'production' ? process.env.VERCEL
 
 // Configuración de CORS
 const corsOptions = {
-  origin: "https://plataforma-cursos-online-backend.vercel.app/api/curso/mostrar-cursos", // Permitir todas las solicitudes temporariamente
+  origin: "https://plataforma-cursos-online-navy.vercel.app", // Permitir todas las solicitudes temporariamente
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'], // Cabeceras permitidas
 };
