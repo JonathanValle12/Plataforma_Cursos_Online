@@ -38,9 +38,6 @@ const NavBar = () => {
             <li className='lista'>
                 <NavLink to="/cursos">Cursos</NavLink>    
             </li>
-            <li className='lista'>
-                <NavLink to="/cursos/mis-cursos">Mis Cursos</NavLink>    
-            </li>
             {(!auth._id) ? 
                 <li className='lista'>
                     <span onMouseEnter={showLoginMessage} onMouseOut={hideAlert} className='bloqueado'>Crear Cursos</span>

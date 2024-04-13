@@ -14,19 +14,8 @@ console.log("API ARRANCADA");
 const app = express();
 const puerto = process.env.PORT || 3900; // Definir puerto en el 3900
 
-// Iniciar mi app para que utilize los cors(), y pasar el express en json y por ultimo definir que pasaremos todo por el urlencoded que estaa en el postman dentro del body
-
-const allowedOrigin = process.env.NODE_ENV === 'production' ? process.env.VERCEL_URL : 'http://localhost:5173'
-
-// Configuración de CORS
-const corsOptions = {
-  origin: "https://plataforma-cursos-online-navy.vercel.app", // Permitir todas las solicitudes temporariamente
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
-  allowedHeaders: ['Content-Type', 'Authorization'], // Cabeceras permitidas
-};
-
 // Habilitar CORS con opciones personalizadas
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

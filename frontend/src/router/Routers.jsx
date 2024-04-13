@@ -3,7 +3,6 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Cursos from '../components/cursos/Cursos';
 import Login from '../components/login/Login';
 import Registro from '../components/login/Registro';
-import MisCursos from '../components/cursos/MisCursos';
 import CrearCursos from '../components/cursos/CrearCursos';
 import ListarCurso from '../components/cursos/ListarCurso';
 import Error from '../Error';
@@ -22,7 +21,6 @@ const Routers = () => {
           <Route index element={<Cursos />} />
           <Route path="/cursos">
             <Route path='' element={<Cursos />} />
-            <Route path="mis-cursos" element={<MisCursos />} />
             <Route path="crear-cursos" element={<CrearCursos />} />
             <Route path="editarPerfil" element={<EditarPerfil />} />
             <Route path="ver-curso/:id" element={<ListarCurso />} />
