@@ -13,8 +13,11 @@ const Cursos = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(Global.urlCursos + 'mostrar-cursos', {
+        const response = await fetch(Global.urlCursos + "mostrar-cursos", {
           method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }); // Reemplaza con la URL de tu API
         const jsonData = await response.json();
         setData(jsonData);
