@@ -1,5 +1,5 @@
 // Urls de la API al que apunta mi NodeJS
-const apiUrl = "https://plataforma-cursos-online-backend.vercel.app";
+const apiUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3901' : process.env.BACKEND_URL;
 
 export const Global = {
     url: `${apiUrl}/api/user/`,
