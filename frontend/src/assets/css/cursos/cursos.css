@@ -3,6 +3,7 @@
     justify-content: center;
     flex-direction: column;
 }
+
 .mainCursos1 a {
     text-decoration: none;
     color: #000;
@@ -15,11 +16,13 @@
     margin: 0 150px;
     margin-top: 20px;
 }
+
 .mainCursos1 .buscador select {
     background-color: #338B85;
     color: #fff;
     padding: 8px 10px;
 }
+
 .mainCursos1 .buscador input {
     padding: 10px;
     font-size: 16px;
@@ -29,6 +32,7 @@
     margin-left: 10px;
     width: 200px;
 }
+
 .mainCursos1 .no-cursos {
     text-align: center;
     font-size: 24px;
@@ -42,16 +46,17 @@
 
 .mainCursos1 .no-cursos::before {
     content: "\f05e";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  font-size: 48px;
-  display: block;
-  margin-bottom: 20px;
-  color: #ccc;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 48px;
+    display: block;
+    margin-bottom: 20px;
+    color: #ccc;
 }
+
 .mainCursos1 .no-cursos::after {
     content: "😞";
-  display: block;
-  font-size: 40px;
-  margin-top: 20px;
+    display: block;
+    font-size: 40px;
+    margin-top: 20px;
 }

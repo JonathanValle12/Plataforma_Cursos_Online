@@ -103,12 +103,17 @@ const Registro = () => {
     <div className='containerSignUp'>
       <div className='signup'>
         <h1>REGISTRARSE</h1>
+        <div className='rayaSignUp'></div>
         <form onSubmit={enviarDatos}>
           <div className='roles'>
+            <div>
             <input type='radio' id='estudiante' value='estudiante' name='rol' onChange={changed} />
             <label htmlFor='estudiante'>Estudiante</label>
+            </div>
+            <div>
             <input type='radio' id='instructor' value='instructor' name='rol' onChange={changed} />
             <label htmlFor='instructor'>Instructor</label>
+            </div>
           </div>
           <div className='camposRegistro'>
             <input type='text' placeholder='Nombre' name="name" onChange={changed} />
@@ -120,7 +125,7 @@ const Registro = () => {
             <label htmlFor='terminos'>acceptar terminos y codiciones</label>
           </div>
           <div className='crearCuenta'>
-            <input type='submit' value='CREATE ACCOUNT' />
+            <input type='submit' value='Crear Cuenta' />
           </div>
           <div className='tienesCuenta'>
             <p>Ya tienes cuenta? <Link to='../login'>Inicia Sesión</Link> </p>

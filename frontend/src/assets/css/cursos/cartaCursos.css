@@ -1,43 +1,52 @@
 .carta {
     background-color: #9ce0db;
     border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
     display: flex;
     justify-content: space-between;
     padding: 20px;
     width: 80%;
     margin: 20px auto;
-  }
-  .carta2 {
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+}
+
+.carta:hover {
+    background-color: #68b1ac; /* Cambio de color al pasar el ratón */
+    transform: translateY(-4px); /* Efecto de elevación al pasar el ratón */
+}
+
+.carta2 {
     display: flex;
     gap: 10px;
     width: 70%;
-  } 
-  .imagen_curso {
-    width: 170px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  .nombreCurso {
-    font-size: 30px;
-    margin: 0 10px;
-    margin-top: 10px;
-  }
-
-  .estrellas {
-    font-size: 12px;
-    margin: 0 10px;
-  }
-  .descripcionCurso {
-    width: 100%;
-    margin: 0 20px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-  
-@media screen and (max-width: 1200px) {
+.imagen_curso {
+    width: 170px;
+    height: 150px;
+    border-radius: 15px;
+    object-fit: cover;
+}
 
+.nombreCurso {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.estrellas {
+    font-size: 12px;
+    margin: 10px 0;
+}
+
+.descripcionCurso {
+    width: calc(100% - 170px); /* Resta el ancho de la imagen */
+    margin: 0 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    line-height: 1.5; /* Mejora la legibilidad */
+}
+
+@media screen and (max-width: 1200px) {
     .nombreCurso {
         font-size: 20px;
     }
@@ -63,9 +72,10 @@
 @media screen and (max-width: 800px) {
     .carta {
         flex-direction: column;
-        gap: 20px;
+        align-items: center;
     }
     .descripcionCurso {
-        margin: 0;
+        width: 100%; /* Ocupa todo el ancho en dispositivos móviles */
+        margin: 10px 0;
     }
 }
