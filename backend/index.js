@@ -19,6 +19,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Configuración para servir archivos estáticos desde la carpeta 'uploads/cursos'
+app.use('/uploads/cursos', express.static(path.join(__dirname, 'uploads/cursos')));
 // Importar mi archivo de rutas del User
 const User = require("./routes/user");
 const Admin = require("./routes/admin");
