@@ -30,23 +30,23 @@ const crearCurso = async (req, res) => {
     const extensionPdf = pdf[0].originalname.split('.');
 
 
-    if(extensionImagen[1] != "png" && extensionImagen[1] != "jpg" && extensionImagen[1] != "jpeg") {
-        
-        return res.status(404).send({
-            status: "error",
-            message: "Extension de fichero invalida"
-          });
+    if (extensionImagen[1] != "png" && extensionImagen[1] != "jpg" && extensionImagen[1] != "jpeg") {
 
-    }else if(extensionVideo[1] != "mp4" && extensionImagen[1] != "avi" && extensionImagen[1] != "vlc") {
-        return res.status(404).send({
-          status: "error",
-          message: "Extension de video invalida"
-        });
-    }else if(extensionPdf[1] != "pdf") {
-        return res.status(404).send({ 
-          status: "error",
-          message: "Necesitas subir un fichero pdf"
-        });
+      return res.status(404).send({
+        status: "error",
+        message: "Extension de fichero invalida"
+      });
+
+    } else if (extensionVideo[1] != "mp4" && extensionImagen[1] != "avi" && extensionImagen[1] != "vlc") {
+      return res.status(404).send({
+        status: "error",
+        message: "Extension de video invalida"
+      });
+    } else if (extensionPdf[1] != "pdf") {
+      return res.status(404).send({
+        status: "error",
+        message: "Necesitas subir un fichero pdf"
+      });
     }
 
     const curso = new Curso({
@@ -83,87 +83,93 @@ const crearCurso = async (req, res) => {
   }
 };
 
-const mostrarCursos = async(req, res) =>{
-    try{
-        const cursos = await Curso.find();
-        return res.status(200).send({
-            status: "success",
-            message: "Estos son los cursos",
-            cursos
-        })
-    }catch(error){
-        return res.status(500).send({
-            status : "error",
-            message: "Error al buscar los cursos" 
-        }) ;
-    }
+const mostrarCursos = async (req, res) => {
+  try {
+    const cursos = await Curso.find();
+    return res.status(200).send({
+      status: "success",
+      message: "Estos son los cursos",
+      cursos
+    })
+  } catch (error) {
+    return res.status(500).send({
+      status: "error",
+      message: "Error al buscar los cursos"
+    });
+  }
 }
 
-const mostrarCurso = async(req, res) =>{
+const mostrarCurso = async (req, res) => {
   const idCurso = req.params.id;
-  try{
-      const curso = await Curso.findById(idCurso).populate("idInstructor", "-password -created_at -estado -rol -__v");
-      return res.status(200).send({
-          status: "success",
-          message: "Este es el curso",
-          curso
-      })
-  }catch(error){
-      return res.status(500).send({
-          status : "error",
-          message: "Error al buscar el curso" 
-      });
+  try {
+    const curso = await Curso.findById(idCurso).populate("idInstructor", "-password -created_at -estado -rol -__v");
+    return res.status(200).send({
+      status: "success",
+      message: "Este es el curso",
+      curso
+    })
+  } catch (error) {
+    return res.status(500).send({
+      status: "error",
+      message: "Error al buscar el curso"
+    });
   }
 }
 
 const visualizarImagen = async (req, res) => {
-  try {
-    const file = req.params.file;
-    const filePath = path.resolve(__dirname, './uploads/cursos/', file);
-
-    res.sendFile(filePath);
-  } catch (error) {
-    res.status(404).send({
-      status: 'error',
-      message: 'No se pudo encontrar la imagen',
-    });
-  }
-};
-
-const visualizarDocs = async(req, res) => {
   const file = req.params.file;
 
-  const filePath = "./uploads/docs/"+file;
+  const filePath = path.resolve(__dirname, './uploads/cursos/', file);
 
+  console.log(filePath);
+  
   fs.stat(filePath, (error, exists) => {
 
-      if(!exists) {
-          return res.status(404).send({
-              status: "error",
-              message: "No existe documentos subidos"
-          })
-      }
+    if (!exists) {
+      return res.status(404).send({
+        status: "error",
+        message: "No existe la imagen"
+      })
+    }
 
-      // Devolver un file
-      return res.sendFile(path.resolve(filePath));
+    // Devolver un file
+    return res.sendFile(path.resolve(filePath));
   })
 }
-const visualizarVideo = async(req, res) => {
+const visualizarDocs = async (req, res) => {
   const file = req.params.file;
 
-  const filePath = "./uploads/videos/"+file;
+  const filePath = "./uploads/docs/" + file;
 
   fs.stat(filePath, (error, exists) => {
 
-      if(!exists) {
-          return res.status(404).send({
-              status: "error",
-              message: "No existe un video"
-          })
-      }
+    if (!exists) {
+      return res.status(404).send({
+        status: "error",
+        message: "No existe documentos subidos"
+      })
+    }
 
-      // Devolver un file
-      return res.sendFile(path.resolve(filePath));
+    // Devolver un file
+    return res.sendFile(path.resolve(filePath));
+  })
+}
+const visualizarVideo = async (req, res) => {
+  const file = req.params.file;
+
+  const filePath = "./uploads/videos/" + file;
+
+  fs.stat(filePath, (error, exists) => {
+
+    if (!exists) {
+      return res.status(404).send({
+        status: "error",
+        message: "No existe un video"
+      })
+    }
+
+    // Devolver un file
+    return res.sendFile(path.resolve(filePath));
   })
 }
 
@@ -234,7 +240,7 @@ const mostrarComentarios = async (req, res) => {
   }
 };
 
-const eliminarComentario = async(req, res) => {
+const eliminarComentario = async (req, res) => {
   const idCurso = req.params.idCurso;
   const idComentario = req.params.idComentario;
 
@@ -307,7 +313,7 @@ const añadirRating = async (req, res) => {
     }
 
     let ratingPromedio = suma / totalRating;
-    
+
     curso.ratingPromedio = ratingPromedio;
 
     await curso.save();
@@ -365,16 +371,16 @@ const obtenerRating = async (req, res) => {
 };
 
 module.exports = {
-    crearCurso,
-    mostrarCursos,
-    mostrarCurso,
-    visualizarImagen,
-    visualizarDocs,
-    visualizarVideo,
-    añadirComentario,
-    mostrarComentarios,
-    eliminarComentario,
-    añadirRating,
-    obtenerRating
+  crearCurso,
+  mostrarCursos,
+  mostrarCurso,
+  visualizarImagen,
+  visualizarDocs,
+  visualizarVideo,
+  añadirComentario,
+  mostrarComentarios,
+  eliminarComentario,
+  añadirRating,
+  obtenerRating
 };
 
