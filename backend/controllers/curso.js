@@ -116,24 +116,20 @@ const mostrarCurso = async(req, res) =>{
   }
 }
 
-const visualizarImagen = async(req, res) => {
-  const file = req.params.file;
+const visualizarImagen = async (req, res) => {
+  try {
+    const file = req.params.file;
+    const filePath = path.resolve(__dirname, './uploads/cursos/', file);
 
-  const filePath = "./uploads/cursos/"+file;
+    res.sendFile(filePath);
+  } catch (error) {
+    res.status(404).send({
+      status: 'error',
+      message: 'No se pudo encontrar la imagen',
+    });
+  }
+};
 
-  fs.stat(filePath, (error, exists) => {
-
-      if(!exists) {
-          return res.status(404).send({
-              status: "error",
-              message: "No existe la imagen"
-          })
-      }
-
-      // Devolver un file
-      return res.sendFile(path.resolve(filePath));
-  })
-}
 const visualizarDocs = async(req, res) => {
   const file = req.params.file;
 

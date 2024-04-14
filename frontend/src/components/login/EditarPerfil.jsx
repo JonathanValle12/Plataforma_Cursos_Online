@@ -38,6 +38,7 @@ const EditarPerfil = () => {
             method: 'POST',
             body: formData,
             headers: {
+                'Content-Type': 'application/json',
                 "Authorization": token
             }
         });
