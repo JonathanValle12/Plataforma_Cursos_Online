@@ -7,9 +7,30 @@
     }
   ],
   "routes": [
+    { "handle": "filesystem" },
     {
-      "src": "/(.*)",
-      "dest": "/"
+      "src": "/api/(.*)",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/uploads/avatars/(.*)",
+      "dest": "/uploads/avatars/$1"
+    },
+    {
+      "src": "/uploads/curriculums/(.*)",
+      "dest": "/uploads/curriculums/$1"
+    },
+    {
+      "src": "/uploads/cursos/(.*)",
+      "dest": "/uploads/cursos/$1"
+    },
+    {
+      "src": "/uploads/docs/(.*)",
+      "dest": "/uploads/docs/$1"
+    },
+    {
+      "src": "/uploads/videos/(.*)",
+      "dest": "/uploads/videos/$1"
     }
   ]
 }
